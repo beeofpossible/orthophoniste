@@ -1,0 +1,104 @@
+{% extends "apps/layouts/base.html" %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvre les sons ! </title>
+    <style>
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e2e3ec; /* Fond de page */
+            color: #0b1114; /* Couleur du texte */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #0b1114;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grille responsive */
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Carte individuelle pour chaque media */
+        .media-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .media-item:hover {
+            transform: scale(1.05);
+        }
+
+        .media-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .media-item p {
+            font-size: 16px;
+            color: #0b1114;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Transition de style pour effet de survol */
+        .media-item:hover img {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Découvre les sons associés !</h1>
+        <div class="gallery-grid" id="gallery">
+            {% for media in medias %}
+                <div class="media-item">
+                    <img src="{{ media.image.url }}" alt="{{ media.title }}" onclick="playSound('{{ media.sound.url }}')">
+                    <p>{{ media.title }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function playSound(soundUrl) {
+            const audio = new Audio(soundUrl);
+            audio.play();
+        }
+    </script>
+</body>
+{% endblock content %}

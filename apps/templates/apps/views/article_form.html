@@ -1,0 +1,72 @@
+{% extends "apps/layouts/base.html" %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<head>
+    <title>{% if object %}Modifier{% else %}Créer{% endif %} un article</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #c4c2c0; /* Fond de page */
+            color: #0b1114; /* Couleur du texte */
+            display: flex;
+            flex-direction: column; /* Disposer les éléments verticalement */
+            align-items: center; /* Centrer horizontalement */
+            min-height: 100vh; /* S'assurer que le body prend toute la hauteur */
+        }
+
+        h1 {
+            color: #0b1114;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .form-container {
+            max-width: 600px; /* Largeur maximale du formulaire */
+            background-color: #fff; /* Fond blanc pour le formulaire */
+            padding: 20px;
+            border-radius: 8px; /* Arrondi des bords */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%; /* S'assurer que le formulaire prend toute la largeur disponible */
+        }
+
+        button {
+            background-color: #e28743; /* Couleur du bouton */
+            color: #fff; /* Couleur du texte du bouton */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* S'assurer que le bouton prend toute la largeur */
+        }
+
+        button:hover {
+            background-color: #c5773a; /* Couleur du bouton au survol */
+        }
+
+        a {
+            color: #e28743; /* Couleur du lien de retour */
+            margin-top: 20px;
+            text-decoration: underline; /* Souligner le lien */
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0b1114; /* Couleur au survol du lien de retour */
+        }
+    </style>
+</head>
+<body>
+    <h1>{% if object %}Modifier{% else %}Créer{% endif %} un article</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if object %}Mettre à jour{% else %}Créer{% endif %}</button>
+        </form>
+    </div>
+    <a href="{% url 'liste_articles' %}">Retour à la liste des articles</a>
+{% endblock content %}

@@ -1,0 +1,101 @@
+{% extends "apps/layouts/base.html" %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<head>
+    <title>{{ article.titre }}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e2e3ec; /* Fond de page */
+            color: #0b1114; /* Couleur du texte */
+            display: flex;
+            flex-direction: column; /* Disposer les éléments verticalement */
+            align-items: center; /* Centrer horizontalement */
+            min-height: 100vh; /* S'assurer que le body prend toute la hauteur */
+        }
+
+        h1 {
+            color: #0b1114;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666; /* Couleur pour la date de publication */
+        }
+
+        .content {
+            max-width: 800px; /* Largeur maximale du contenu */
+            background-color: #fff; /* Fond blanc pour le contenu */
+            padding: 20px;
+            border-radius: 8px; /* Arrondi des bords */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px; /* Marge autour du contenu */
+        }
+
+        /* Liens d'administration */
+        .admin-links {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Disposition verticale */
+            align-items: center; /* Centrer les liens */
+        }
+
+        .admin-links a {
+            margin: 5px 0; /* Espace entre les liens */
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .admin-links .edit-link {
+            background-color: #ffc107; /* Couleur de la modification */
+        }
+        .admin-links .edit-link:hover {
+            background-color: #e0a800; /* Couleur de survol */
+        }
+        .admin-links .delete-link {
+            background-color: #dc3545; /* Couleur de la suppression */
+        }
+        .admin-links .delete-link:hover {
+            background-color: #c82333; /* Couleur de survol */
+        }
+
+        /* Lien de retour à la liste des articles */
+        .back-link {
+            margin-top: 20px; /* Espace au-dessus du lien de retour */
+            color: #e28743; /* Couleur du lien de retour */
+            text-decoration: underline; /* Soulignement pour indiquer un lien */
+        }
+        .back-link:hover {
+            color: #0b1114; /* Couleur au survol */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>{{ article.titre }}</h1>
+        <p>Publié le : {{ article.date_publication }}</p>
+        <div>
+            {{ article.contenu|safe }}
+        </div>
+
+        {% if user.is_staff %}
+            <hr>
+            <div class="admin-links">
+                <a href="{% url 'article_update' article.id %}" class="edit-link">Modifier cet article</a>
+                <a href="{% url 'article_delete' article.id %}" class="delete-link">Supprimer cet article</a>
+                <a href="{% url 'article_create' %}" class="create-link">Créer un nouvel article</a>
+            </div>
+        {% endif %}
+
+        <a href="{% url 'liste_articles' %}" class="back-link">Retour à la liste des articles</a>
+    </div>
+</body>
+{% endblock content %}

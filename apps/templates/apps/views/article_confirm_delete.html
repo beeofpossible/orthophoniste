@@ -1,0 +1,18 @@
+{% extends "apps/layouts/base.html" %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<head>
+    <title>Supprimer l'article</title>
+</head>
+<body>
+    <h1>Confirmer la suppression de l'article</h1>
+    <p>Es-tu sûr de vouloir supprimer l'article "{{ object.titre }}" ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Oui, supprimer</button>
+        <a href="{% url 'liste_articles' %}">Annuler</a>
+    </form>
+{% endblock content %}
