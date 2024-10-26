@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-()redk(&%j6sirmmbm2hlbk13&d9fxf^-=oo0fa=y9^74qfdy$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["orthophoniste-production.up.railway.app/","www.orthophoniste-production.up.railway.app",
+ALLOWED_HOSTS = ["orthophoniste-production.up.railway.app","www.orthophoniste-production.up.railway.app",
                  "127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1:8000/',
                         'http://127.0.0.1:8000/',
